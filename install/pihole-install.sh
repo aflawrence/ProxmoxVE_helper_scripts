@@ -103,15 +103,15 @@ forward-zone:
   forward-tls-upstream: yes
   forward-first: no
 
-  forward-addr: 8.8.8.8@853#dns.google
-  forward-addr: 8.8.4.4@853#dns.google
-  forward-addr: 2001:4860:4860::8888@853#dns.google
-  forward-addr: 2001:4860:4860::8844@853#dns.google
+  #forward-addr: 8.8.8.8@853#dns.google
+  #forward-addr: 8.8.4.4@853#dns.google
+  #forward-addr: 2001:4860:4860::8888@853#dns.google
+  #forward-addr: 2001:4860:4860::8844@853#dns.google
 
-  #forward-addr: 1.1.1.1@853#cloudflare-dns.com
-  #forward-addr: 1.0.0.1@853#cloudflare-dns.com
-  #forward-addr: 2606:4700:4700::1111@853#cloudflare-dns.com
-  #forward-addr: 2606:4700:4700::1001@853#cloudflare-dns.com
+  forward-addr: 1.1.1.1@853#cloudflare-dns.com
+  forward-addr: 1.0.0.1@853#cloudflare-dns.com
+  forward-addr: 2606:4700:4700::1111@853#cloudflare-dns.com
+  forward-addr: 2606:4700:4700::1001@853#cloudflare-dns.com
 
   #forward-addr: 9.9.9.9@853#dns.quad9.net
   #forward-addr: 149.112.112.112@853#dns.quad9.net
@@ -120,8 +120,8 @@ forward-zone:
 EOF
   fi
 
-  sed -i -e 's/PIHOLE_DNS_1=8.8.8.8/PIHOLE_DNS_1=127.0.0.1#5335/' -e '/PIHOLE_DNS_2=8.8.4.4/d' /etc/pihole/setupVars.conf
-  sed -i -e 's/server=8.8.8.8/server=127.0.0.1#5335/' -e '/server=8.8.4.4/d' /etc/dnsmasq.d/01-pihole.conf
+  sed -i -e 's/PIHOLE_DNS_1=1.1.1.1/PIHOLE_DNS_1=127.0.0.1#5335/' -e '/PIHOLE_DNS_2=1.0.0.1/d' /etc/pihole/setupVars.conf
+  sed -i -e 's/server=1.1.1.1/server=127.0.0.1#5335/' -e '/server=1.0.0.1/d' /etc/dnsmasq.d/01-pihole.conf
   systemctl enable -q --now unbound
   systemctl restart pihole-FTL.service
   msg_ok "Installed Unbound"
